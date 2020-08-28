@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="search-form">
+<h1>Fleam</h1>
+<h2>Login</h2>
+<form method="POST" >
+    <ul>
+        <li>{{ form.query.label }}</li>
+        <li>{{ form.query }}</li>
+        <li>{{ form.city.label }}</li>
+        <li>{{ form.city }}</li>
+        <li>{{ form.price.label }}</li>
+        <li>{{ form.price }}</li>
+        <li>{{ form.submit }}</li>
+    </ul>
+</form>
+</div>
+{% endblock %}

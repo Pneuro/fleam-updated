@@ -1,0 +1,16 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+<div class="login">
+    <h1>Fleam</h1>
+<h2>Login</h2>
+<form method="POST" >
+    <ul>
+        <li>{{ form.email.label }}</li>
+        <li>{{ form.email }}</li>
+        <li>{{ form.password.label }}</li>
+        <li>{{ form.password }}</li>
+        <li>{{ form.submit }}</li>
+    </ul>
+</form>
+</div>
+{% endblock %}

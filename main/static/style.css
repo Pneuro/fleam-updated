@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Alata&display=swap');
+:root {
+    --background: #255F85;
+    --alt: #481D24;
+    --text: #eee;
+    --highlight: #FFC857;
+    --tert: #C5283D;
+}
+
+* {
+    font-family: 'Alata', sans-serif;
+    background-color: var(--alt);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    box-sizing: border-box;
+}
+body {
+    color: var(--text);
+}
+.search-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    color: #eee;
+    line-height: 1.6;
+}
+.search-form input {
+    border: none;
+    border-radius: 25px;
+    width: 250px;
+    background-color: #eee;
+
+}
+
+.search-form input:focus {
+    background-color: var(--highlight);
+}
+.search-form ul li{
+    list-style: none;
+    border: none;
+}
