@@ -30,7 +30,7 @@ class User(db.Model):
     first_name = db.Column(db.String())
     last_name = db.Column(db.String())
     email = db.Column(db.String())
-    password = db.Column()
+    password = db.Column(db.String())
     location = db.Column(db.String())
     
     def __init__(self, first_name, last_name, password, email, location):

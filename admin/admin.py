@@ -9,6 +9,7 @@ def login():
     ''' Route to admin.html  '''
     form = LoginForm()
     if request.method == 'POST':
+        
         print(request)
         return redirect(url_for('main.index'))
     

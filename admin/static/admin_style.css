@@ -9,13 +9,14 @@
 
 * {
     font-family: 'Alata', sans-serif;
-    background-color: var(--background);
     margin: 0;
     padding: 0;
     text-align: center;
     box-sizing: border-box;
 }
-
+body {
+background-color: var(--background);
+}
 .login {
     display: flex;
     flex-direction: column;
@@ -30,13 +31,17 @@
     border: none;
     border-radius: 25px;
     width: 250px;
-    background-color: #eee;
-
+    
 }
 
-.login input:focus {
-    background-color: var(--highlight);
+.card {
+    /* width: 320px; */
+    padding: 75px 30px;
+    border-radius: 10px;
+    border: 1px white solid;
+    background-color: #28668f;
 }
+
 .login ul li{
     list-style: none;
     border: none;

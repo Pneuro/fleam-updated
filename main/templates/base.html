@@ -5,9 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fleam</title>
     <link rel="stylesheet" href={{ url_for('main.static', filename="style.css" )}}>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <h1>Fleam</h1>
+    <nav >
+    <ul class="nav">
+        <li>
+            <a href="#">Admin</a>
+        </li>
+        <li>
+            <a href="#">Search</a>
+        </li>
+        <li>
+            <a href="#">About</a>
+        </li>
+    </ul>
+</nav>
     {% block content %}
     {% endblock %}
 </body>

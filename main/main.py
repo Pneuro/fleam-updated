@@ -18,3 +18,4 @@ def index():
         # Redirect here to scrape the data.
         return redirect('')
     return render_template('index.html', form=form)
+
