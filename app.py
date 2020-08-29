@@ -11,12 +11,16 @@ def create_app():
 
     app.register_blueprint(main)
     app.register_blueprint(admin)
-    db.init_app(app)
-    migrate = Migrate()
-    migrate.init_app(app)
+    with app.app_context():
+        db.init_app(app)
+        migrate = Migrate()
+        migrate.init_app(app)
     return app
 
 app = create_app()
+
+
+
 @app.route('/')
 def fleam():
     ''' This route shall redirect to the main folder index.html file '''
