@@ -48,7 +48,7 @@ class User(db.Model):
 class Results(db.Model):
     __tablename__ = 'Results'
     
-    id = db.Column(db.Integer, ForeignKey(SearchQuery.id))
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String())
     city = db.Column(db.String())
     price = db.Column(db.Integer())
