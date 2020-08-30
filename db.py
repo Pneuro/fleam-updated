@@ -4,7 +4,7 @@ from flask_marshmallow import Marshmallow
 
 
 db = SQLAlchemy()
-ma = Marshmallow
+ma = Marshmallow()
 
 
 class User(db.Model):
@@ -27,12 +27,6 @@ class User(db.Model):
     def __repr__(self):
         return f'<id: {self.id} name {self.first_name} {self.last_name}>'
     
-class UserSchema(ma.Schema):
-    class Meta:
-        fields = ('id', 'first_name', 'last_name', 'email')
-        
-user_schema = UserSchema(strict=True)
-users_schema = UserSchema(many=True, strict=True)
 
 
 class SearchQuery(db.Model):
@@ -51,15 +45,7 @@ class SearchQuery(db.Model):
     def __repr__(self):
         return f'<id: {self.id},\n query: {self.query}>'
     
-#Schema
-class SearchSchema(ma.Schema):
-    class Meta:
-        fields = ('id', 'query', 'city', 'price')
-        
-search_schema = SearchSchema(strict=True)
-searchs_schema = SearchSchema(many=True, strict=True)
-    
-    
+
 class Results(db.Model):
     __tablename__ = 'Results'
     
@@ -81,11 +67,28 @@ class Results(db.Model):
         
     def __repr__(self):
         return f'<id: {self.id} Title {self.title},  {self.city}>'
+
+
+
+#Schema
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'first_name', 'last_name', 'email')
+        
+user_schema = UserSchema()
+users_schema = UserSchema(many=True)
+    
+class SearchSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'query', 'city', 'price')
+        
+search_schema = SearchSchema()
+searchs_schema = SearchSchema(many=True)
     
     
 class ResultsSchema(ma.Schema):
     class Meta:
         fields = ('id', 'title', 'city', 'price', 'url', 'date_posted', 'source')
 
-result_schema = ResultsSchema(strict=True)
-results_schema = ResultsSchema(many=True, strict=True)
+result_schema = ResultsSchema()
+results_schema = ResultsSchema(many=True)

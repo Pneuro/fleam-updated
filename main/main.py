@@ -27,11 +27,8 @@ def index():
         db_query = SearchQuery(query, city, price)
         db.session.add(db_query)
         db.session.commit()
-        print(SearchQuery.city.all_())
-        fucker = dir(SearchQuery.city.all_)
+        print( )
         
-        for i in fucker:
-            print(i)
         # Redirect here to scrape the data.
         return redirect('')
     return render_template('index.html', form=form)
