@@ -1,8 +1,9 @@
 from flask import Flask, redirect
 from admin.admin import admin
 from main.main import main
-from db import db
+from db import db, ma
 from flask_migrate import Migrate
+
 
 def create_app():
     app = Flask(__name__)
@@ -13,11 +14,17 @@ def create_app():
     app.register_blueprint(admin)
     with app.app_context():
         db.init_app(app)
+        
         migrate = Migrate()
         migrate.init_app(app)
+        ma.init_app(app)
+        
     return app
 
 app = create_app()
+
+
+
 
 
 

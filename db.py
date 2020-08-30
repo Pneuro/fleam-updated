@@ -1,28 +1,12 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey
-
+from flask_marshmallow import Marshmallow
 
 
 db = SQLAlchemy()
+ma = Marshmallow
 
 
-class SearchQuery(db.Model):
-    __tablename__ = 'Queries'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    query = db.Column(db.String())
-    city = db.Column(db.String())
-    price = db.Column(db.Integer())
-    
-    def __init__(self, query, city, price):
-        self.query = query
-        self.city = city
-        self.price = price
-        
-    def __repr__(self):
-        return f'<id: {self.id},\n query: {self.query}>'
-  
-  
 class User(db.Model):
     __tablename__ = 'Users'
     
@@ -43,6 +27,37 @@ class User(db.Model):
     def __repr__(self):
         return f'<id: {self.id} name {self.first_name} {self.last_name}>'
     
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'first_name', 'last_name', 'email')
+        
+user_schema = UserSchema(strict=True)
+users_schema = UserSchema(many=True, strict=True)
+
+
+class SearchQuery(db.Model):
+    __tablename__ = 'Queries'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    query = db.Column(db.String())
+    city = db.Column(db.String())
+    price = db.Column(db.Integer())
+    
+    def __init__(self, query, city, price):
+        self.query = query
+        self.city = city
+        self.price = price
+        
+    def __repr__(self):
+        return f'<id: {self.id},\n query: {self.query}>'
+    
+#Schema
+class SearchSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'query', 'city', 'price')
+        
+search_schema = SearchSchema(strict=True)
+searchs_schema = SearchSchema(many=True, strict=True)
     
     
 class Results(db.Model):
@@ -66,3 +81,11 @@ class Results(db.Model):
         
     def __repr__(self):
         return f'<id: {self.id} Title {self.title},  {self.city}>'
+    
+    
+class ResultsSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'title', 'city', 'price', 'url', 'date_posted', 'source')
+
+result_schema = ResultsSchema(strict=True)
+results_schema = ResultsSchema(many=True, strict=True)
