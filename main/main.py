@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, g, current_app
 from models import SearchForm
-from db import db, SearchQuery, User, Results
+from db import db, SearchQuery, User, Results, search_schema, searchs_schema
 import subprocess
+
 
 main = Blueprint('main', __name__, 
                 template_folder='templates', 
@@ -27,17 +28,21 @@ def index():
         db_query = SearchQuery(query, city, price)
         db.session.add(db_query)
         db.session.commit()
-        print( )
+        
         
         # Redirect here to scrape the data.
-        return redirect('')
+        return redirect('result')
     return render_template('index.html', form=form)
 
 
-@main.route('/user/<query>')
-def show_user(query):
-    user = User.query.filter_by(query=query).first_or_404()
-    return render_template('show_user.html', user=user)
+@main.route('/result')
+def result():
+    
+    
+    
+    dbq = db.session.query(SearchQuery.city).first()
+    
+    return f'{dbq}'
 
 
 # TODO Take most recent DB entry and run scraper

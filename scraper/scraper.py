@@ -4,7 +4,7 @@ scraper = Blueprint('scraper', __name__,
                         template_folder='templates', static_folder='static', url_prefix='/scraper')
 
 @scraper.route('/')
-@scraper.route('/login', methods=['POST', 'GET'])
+@scraper.route('/scraper', methods=['POST', 'GET'])
 def scraper():
     ''' Route to scrape data extracted from data most recently added to DB  '''
     
