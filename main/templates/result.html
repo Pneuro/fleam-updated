@@ -1,8 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="about">
-   {{ result.query }}
-   {{ result.city }}
-   {{ result.price }}
+   <div class="container">
+      <div class="box-table">
+          {% for row in tables %}
+          <tr>
+              <td>{{row|safe}}</td>
+          </tr>
+
+
+          {% endfor %}
+          </tbody>
+      </div>
 </div>
 {% endblock %}

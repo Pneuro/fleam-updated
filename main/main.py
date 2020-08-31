@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, g, current_app
 from models import SearchForm
 from db import SearchQuery, User, Results, search_schema, searchs_schema, db
+import pandas as pd
 
 import subprocess
 
@@ -43,106 +44,24 @@ def result():
     db_query = db.session.query(SearchQuery.query).order_by(SearchQuery.id.desc()).first()
     db_city = db.session.query(SearchQuery.city).order_by(SearchQuery.id.desc()).first()
     db_price = db.session.query(SearchQuery.price).order_by(SearchQuery.id.desc()).first()
-    ScrapeControl.get_data()
+    #ScrapeControl.get_data()
     result = {
         'query':db_query,
         'city': db_city,
         'price': db_price
     }
-    return render_template('result.html', result=result)
+    with open('result.csv', 'r') as scraped:
+        response = pd.read_csv(scraped, delimiter=",")
+
+        df = pd.DataFrame(data=response)
+        print(f'This is the df variable: {df}')
+    return render_template('result.html', tables=[df.to_html(classes='dataframe', index=False, render_links=True, sparsify=True)], titles=df.columns.values)
+    
 
 @main.route('/about')
 def about():
-    db_id = db.session.query(SearchQuery.id).order_by(SearchQuery.id.desc()).first()
-    db_query = db.session.query(SearchQuery.query).order_by(SearchQuery.id.desc()).first()
-    db_city = db.session.query(SearchQuery.city).order_by(SearchQuery.id.desc()).first()
-    db_price = db.session.query(SearchQuery.price).order_by(SearchQuery.id.desc()).first()
-    ScrapeControl.get_data()
-    about = {
-        'query':db_query,
-        'city': db_city,
-        'price': db_price
-    }
+    
     return render_template('about.html', result=result)
-# TODO Take most recent DB entry and run scraper
 
 
-# DBQ Methods
-# 'add_column', 
-# 'add_columns', 
-# 'add_entity', 
-# 'all', 
-# 'as_scalar', 
-# 'autoflush', 
-# 'column_descriptions', 
-# 'correlate', 
-# 'count', 
-# 'cte', 
-# 'delete', 
-# 'dispatch', 
-# 'distinct', 
-# 'enable_assertions', 
-# 'enable_eagerloads', 
-# 'except_', 
-# 'except_all',
-# 'execution_options', 
-# 'exists', 
-# 'filter', 
-# 'filter_by', 
-# 'first', 
-# 'first_or_404', 
-# 'from_self', 
-# 'from_statement', 
-# 'get', 
-# 'get_execution_options', 
-# 'get_or_404', 
-# 'group_by', 
-# 'having', 
-# 'instances', 
-# 'intersect', 
-# 'intersect_all', 
-# 'is_single_entity', 
-# 'join', 
-# 'label', 
-# 'lazy_loaded_from', 
-# 'limit', 
-# 'logger', 
-# 'merge_result', 
-# 'offset', 
-# 'one', 
-# 'one_or_none', 
-# 'only_return_tuples', 
-# 'options', 
-# 'order_by', 
-# 'outerjoin', 
-# 'paginate', 
-# 'params', 
-# 'populate_existing', 
-# 'prefix_with', 
-# 'reset_joinpoint', 
-# 'scalar', 
-# 'select_entity_from', 
-# 'select_from', 
-# 'selectable', 
-# 'session', 
-# 'slice', 
-# 'statement', 
-# 'subquery', 
-# 'suffix_with', 
-# 'union', 
-# 'union_all', 
-# 'update', 
-# 'value', 
-# 'values', 
-# 'whereclause', 
-# 'with_entities', 
-# 'with_for_update', 
-# 'with_hint', 
-# 'with_labels', 
-# 'with_lockmode', 
-# 'with_parent', 
-# 'with_polymorphic', 
-# 'with_session', 
-# 'with_statement_hint', 
-# 'with_transformation', 
-# 'yield_per'
+
