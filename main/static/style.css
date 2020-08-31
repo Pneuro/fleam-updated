@@ -28,9 +28,15 @@ body {
     align-items: center;
     height: 100vh;
     line-height: 1.6;
+    width: 80%;
     background-image: url('garage-sale.png');
     background-repeat: no-repeat;
-    background-size: 100vh;
+    background-size: 200vh;
+    background-position: center;
+    border-radius: 25px;
+    border: 1px white solid;
+    margin: auto;
+
 }
 
 .search-form input {
@@ -75,9 +81,8 @@ body {
 .card {
     padding: 50px 35px;
     background-color: var(--background);
+    opacity: 70%;
     border-radius: 25px;
-    
-    
 }
 
 .search-form input:focus {

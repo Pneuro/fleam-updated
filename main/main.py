@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, g, current_app
 from models import SearchForm
-from db import db, SearchQuery, User, Results, search_schema, searchs_schema
+from db import SearchQuery, User, Results, search_schema, searchs_schema, db
+
 import subprocess
 
 
@@ -13,7 +14,7 @@ main = Blueprint('main', __name__,
 class ScrapeControl():
     def get_data():
         '''This runs the subprocess to actuate the scraper. '''
-        subprocess.run(['scrapy', 'crawl', 'fleam_spider'])
+        subprocess.run(['scrapy', 'crawl', 'fleam_spider', '-o', 'result.csv'])
         return 'ran'
     
     
@@ -29,7 +30,7 @@ def index():
         db.session.add(db_query)
         db.session.commit()
         
-        
+        #ScrapeControl.get_data()
         # Redirect here to scrape the data.
         return redirect('result')
     return render_template('index.html', form=form)
@@ -37,16 +38,32 @@ def index():
 
 @main.route('/result')
 def result():
-    
+    ''' CONSIDER TRYING TO IMPORT THE SCRAPER HERE AND THEN RUN THOSE COMMANDS HERE LIKE A GOOD PROGRAMMER '''
     db_id = db.session.query(SearchQuery.id).order_by(SearchQuery.id.desc()).first()
     db_query = db.session.query(SearchQuery.query).order_by(SearchQuery.id.desc()).first()
     db_city = db.session.query(SearchQuery.city).order_by(SearchQuery.id.desc()).first()
     db_price = db.session.query(SearchQuery.price).order_by(SearchQuery.id.desc()).first()
-    
     ScrapeControl.get_data()
-    return f'{db_id} {db_query} {db_city} {db_price}'
+    result = {
+        'query':db_query,
+        'city': db_city,
+        'price': db_price
+    }
+    return render_template('result.html', result=result)
 
-
+@main.route('/about')
+def about():
+    db_id = db.session.query(SearchQuery.id).order_by(SearchQuery.id.desc()).first()
+    db_query = db.session.query(SearchQuery.query).order_by(SearchQuery.id.desc()).first()
+    db_city = db.session.query(SearchQuery.city).order_by(SearchQuery.id.desc()).first()
+    db_price = db.session.query(SearchQuery.price).order_by(SearchQuery.id.desc()).first()
+    ScrapeControl.get_data()
+    about = {
+        'query':db_query,
+        'city': db_city,
+        'price': db_price
+    }
+    return render_template('about.html', result=result)
 # TODO Take most recent DB entry and run scraper
 
 

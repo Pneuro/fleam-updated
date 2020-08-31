@@ -12,13 +12,13 @@
     <nav >
     <ul class="nav">
         <li>
-            <a href="#">Admin</a>
+            <a href={{ url_for('admin.login' )}}>Admin</a>
         </li>
         <li>
-            <a href="#">Search</a>
+            <a href={{ url_for('main.index' )}}>Search</a>
         </li>
         <li>
-            <a href="#">About</a>
+            <a href={{ url_for('main.about' )}}>About</a>
         </li>
     </ul>
 </nav>
