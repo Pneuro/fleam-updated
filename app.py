@@ -1,10 +1,9 @@
-from flask import Flask, redirect, current_app, g, session,request
+from flask import Flask, redirect, current_app, g, session, request
 from admin.admin import admin
 from main.main import main
 from db import db, ma
 from flask_migrate import Migrate
-
-
+import os
 
 def create_app():
     app = Flask(__name__)
@@ -25,6 +24,27 @@ def create_app():
 
 app = create_app()
 
+app.config.update(
+    SECRET_KEY=os.urandom(24),
+
+    # Set the session cookie to be secure
+    SESSION_COOKIE_SECURE=True,
+
+    # Set the session cookie for our app to a unique name
+    SESSION_COOKIE_NAME='Portfolio-WebSession',
+
+    # Set CSRF tokens to be valid for the duration of the session. This assumes you’re using WTF-CSRF protection
+    WTF_CSRF_TIME_LIMIT=None,
+
+    # Configure Environment
+    # FLASK_ENV='production',
+
+    # Set Flask App
+    # FLASK_APP='app.py',
+
+    # Debug
+    DEBUG=False
+)
 app.app_context().push()
 
 

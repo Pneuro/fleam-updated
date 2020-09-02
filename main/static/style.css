@@ -73,32 +73,151 @@ body {
     border: 1px #eee solid;
     background-color: var(--background);
     text-align: center;
-    width: 250px;
+    width: 80%;
     margin: 5px;
     padding: 2px;
 }
 
 .card {
-    padding: 50px 35px;
+    padding: 20px;
+    margin: 10px;
     background-color: var(--background);
     opacity: 70%;
     border-radius: 25px;
+    width: 350px;
 }
 
 .search-form input:focus {
     background-color: var(--highlight);
 }
 
+
 .search-form ul li{
     list-style: none;
     border: none;
 }
-.box-table {
-    border: 2px purple solid;
+
+/* Results Table */
+.dataframe {
+    border: none;
+    font-size: 14px;
     
 }
+
+.dataframe td, th{ 
+    border: none;
+}
+
+.dataframe a{
+    color: orange;
+}
+
+
 footer {
     text-align: center;
     color: var(--text);
     padding: 20px;
+}
+@media (max-width: 400px){
+    .search-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        line-height: 1.6;
+        width: 80%;
+        background-image: url('garage-sale.png');
+        background-repeat: no-repeat;
+        background-size: 200vh;
+        background-position: center;
+        border-radius: 25px;
+        border: 1px white solid;
+        margin: auto;
+
+    }
+
+    .search-form input {
+        border: none;
+        border-radius: 25px;
+        width: 250px;
+        background-color: #eee;
+
+    }
+
+    .nav {
+        display: flex;
+        justify-content: space-around;
+
+    }
+
+    .nav li {    
+        list-style: none;    
+    }
+
+    .nav a {
+        display: inline-block;
+        text-decoration: none;    
+        color: var(--text);
+
+        padding: 10px 20px;
+
+    }
+
+    .city {
+        color: var(--text);
+        border: none;
+        border-radius: 25px;
+        border: 1px #eee solid;
+        background-color: var(--background);
+        text-align: center;
+        width: 80%;
+        margin: 5px;
+        padding: 2px;
+    }
+
+    .card {
+        padding: 20px;
+        margin: 10px;
+        background-color: var(--background);
+        opacity: 70%;
+        border-radius: 25px;
+        width: 90%;
+    }
+
+    .search-form input:focus {
+        background-color: var(--highlight);
+    }
+    .search-form input{
+        width: 80%;
+
+    }
+
+    .search-form ul li{
+        list-style: none;
+        border: none;
+    }
+
+    /* Results Table */
+    .dataframe {
+        border: none;
+        font-size: 10px;
+        
+    }
+
+    .dataframe td, th{ 
+        border: none;
+    }
+
+    .dataframe a{
+        color: orange;
+    }
+
+
+    footer {
+        text-align: center;
+        color: var(--text);
+        padding: 20px;
+    }
+
 }

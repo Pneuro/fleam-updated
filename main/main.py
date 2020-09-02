@@ -48,7 +48,6 @@ def index():
 
 @main.route('/result')
 def result():
-    ''' CONSIDER TRYING TO IMPORT THE SCRAPER HERE AND THEN RUN THOSE COMMANDS HERE LIKE A GOOD PROGRAMMER '''
     # Pull items from database
     db_id = db.session.query(SearchQuery.id).order_by(SearchQuery.id.desc()).first(),
     db_query = db.session.query(SearchQuery.query).order_by(SearchQuery.id.desc()).first(),
