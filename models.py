@@ -18,7 +18,7 @@ class RegistrationForm(Form):
     
     
 class SearchForm(Form):
-    query = StringField('Search')
+    query = StringField('Search', validators=[DataRequired()], default='Lawnmower')
     city = SelectField('City', choices=[
         # Alabama
         ('auburn', 'Auburn, Alabama'), 
@@ -59,7 +59,7 @@ class SearchForm(Form):
         ('chico', 'Chico, California'),
         ('fresno', 'Fresno, California'),
         ('goldcountry', 'Gold Country, California'),
-        ('hanford-corcoran', 'Hanford-Corcoran, California'),
+        ('hanford', 'Hanford-Corcoran, California'),
         ('humboldt', 'Humboldt County, California'),
         ('imperial', 'Imperial County, California'),
         ('inlandempire', 'Inland Empire, California'),
@@ -97,7 +97,7 @@ class SearchForm(Form):
         
         
         ])
-    price = IntegerField()
+    price = IntegerField(default=500)
     submit = SubmitField('Search')
     
     

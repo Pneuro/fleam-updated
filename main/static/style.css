@@ -93,7 +93,10 @@ body {
     list-style: none;
     border: none;
 }
-
+.box-table {
+    border: 2px purple solid;
+    
+}
 footer {
     text-align: center;
     color: var(--text);

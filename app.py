@@ -1,9 +1,9 @@
-from flask import Flask, redirect
+from flask import Flask, redirect, current_app, g, session,request
 from admin.admin import admin
 from main.main import main
 from db import db, ma
 from flask_migrate import Migrate
-from fleam_spider.spiders.fleam_spider import spider
+
 
 
 def create_app():
@@ -13,9 +13,10 @@ def create_app():
 
     app.register_blueprint(main)
     app.register_blueprint(admin)
-    app.register_blueprint(spider)
-    db.init_app(app)
+   
     with app.app_context():
+        db.init_app(app)
+        db.create_all()
         migrate = Migrate()
         migrate.init_app(app)
         ma.init_app(app)
@@ -24,7 +25,7 @@ def create_app():
 
 app = create_app()
 
-
+app.app_context().push()
 
 
 
