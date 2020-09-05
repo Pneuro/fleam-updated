@@ -33,8 +33,6 @@ MarkupSafe==1.1.1
 marshmallow==3.7.1
 marshmallow-sqlalchemy==0.23.1
 numpy==1.19.1
-oauth2==1.9.0.post1
-oauthlib==2.1.0
 pandas==1.1.1
 parsel==1.6.0
 Protego==0.1.16
