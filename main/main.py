@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, g, current_app
+from flask import Blueprint, render_template, request, redirect, g, current_app, session, url_for
 from models import SearchForm
 from db import SearchQuery, User, Results, search_schema, searchs_schema, db
 import pandas as pd
@@ -29,6 +29,7 @@ class ScrapeControl():
 @main.route('/')
 @main.route('/home', methods=['POST', 'GET'])
 def index():
+
     ScrapeControl.kill_scraper()
     form = SearchForm()
     if request.method == 'POST':
@@ -42,12 +43,15 @@ def index():
         ScrapeControl.get_data()
         sleep(2)
         # Redirect here to scrape the data.
-        return redirect('result')
+        return redirect(url_for('main.result'))
     return render_template('index.html', form=form)
+
 
 
 @main.route('/result')
 def result():
+
+        
     # Pull items from database
     db_id = db.session.query(SearchQuery.id).order_by(SearchQuery.id.desc()).first(),
     db_query = db.session.query(SearchQuery.query).order_by(SearchQuery.id.desc()).first(),
@@ -76,12 +80,10 @@ def result():
         return render_template('result.html', tables=[df.to_html(classes='dataframe', index=False, render_links=True, sparsify=True)], titles=df.columns.values, query=query)
     else:
         redirect('index')
-    
 
 @main.route('/about')
 def about():
-    
-    return render_template('about.html', result=result)
+    return render_template('about.html')
 
 
 

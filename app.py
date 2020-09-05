@@ -37,17 +37,16 @@ app.config.update(
     WTF_CSRF_TIME_LIMIT=None,
 
     # Configure Environment
-    # FLASK_ENV='production',
-
-    # Set Flask App
-    # FLASK_APP='app.py',
+    FLASK_ENV='production',
 
     # Debug
     DEBUG=False
 )
+
 app.app_context().push()
 
-
+for i in dir(session):
+    print(i)
 
 
 @app.route('/')
