@@ -1,27 +1,31 @@
 from wtforms import Form, StringField, IntegerField, SelectField, PasswordField, validators, SubmitField
 from wtforms.validators import DataRequired, Length, EqualTo
 
+
 class LoginForm(Form):
     id = ''
     email = StringField('Email', validators=[DataRequired()])
-    password = StringField('Password', validators=[Length(min=6, max=20),DataRequired()])
+    password = StringField('Password', validators=[
+                           Length(min=6, max=20), DataRequired()])
     submit = SubmitField('Login')
-    
+
 
 class RegistrationForm(Form):
     id = ''
     email = StringField('Email', validators=[DataRequired()])
-    password = StringField('Password', validators=[Length(min=6, max=20),DataRequired()])
-    password2 = StringField('Confirm Password', validators=[EqualTo(password),DataRequired()])
+    password = StringField('Password', validators=[
+                           Length(min=6, max=20), DataRequired()])
+    password2 = StringField('Confirm Password', validators=[
+                            EqualTo(password), DataRequired()])
     submit = SubmitField('Login')
-    
-    
-    
+
+
 class SearchForm(Form):
-    query = StringField('Search', validators=[DataRequired()], default='Lawnmower')
+    query = StringField('Search', validators=[
+                        DataRequired()], default='Lawnmower')
     city = SelectField('City', choices=[
         # Alabama
-        ('auburn', 'Auburn, Alabama'), 
+        ('auburn', 'Auburn, Alabama'),
         ('bham', 'Birmingham, Alabama'),
         ('dothan', 'Dothan, Alabama'),
         ('shoals', 'Florence / Shoals, Alabama'),
@@ -30,13 +34,13 @@ class SearchForm(Form):
         ('mobile', 'Mobile, Alabama'),
         ('montgomery', 'Montgomery, Alabama'),
         ('tuscaloosa', 'Tuscaloosa, Alabama'),
-        
+
         # Alaska
         ('anchorage', 'Anchorage, Alaska'),
         ('fairbanks', 'Anchorage, Alaska'),
         ('kenai', 'Kenai Peninsula, Alaska'),
         ('juneau', 'Southeast Alaska, Alaska'),
-        
+
         # Arizona
         ('flagstaff', 'Flagstaff / Sedona, Arizona'),
         ('mohave', 'mohave, Arizona'),
@@ -46,14 +50,14 @@ class SearchForm(Form):
         ('sierravista', 'Sierra Vista, Arizona'),
         ('tucson', 'Tucson, Arizona'),
         ('yuma', 'Yuma, Arizona'),
-        
+
         # Arkansas
         ('fayar', 'Fayetteville, Arkansas'),
         ('fortsmith', 'Fort Smith, Arkansas'),
         ('jonesboro', 'Jonesboro, Arkansas'),
         ('littlerock', 'Little Rock, Arkansas'),
         ('texarkana', 'Texarkana, Arkansas'),
-        
+
         # California
         ('bakersfield', 'Bakersfield, California'),
         ('chico', 'Chico, California'),
@@ -83,7 +87,7 @@ class SearchForm(Form):
         ('ventura', 'Ventura County, California'),
         ('visalia', 'Visalia-Tulare, California'),
         ('yubasutter', 'Yuba-Sutter, California'),
-        
+
         # Colorado
         ('boulder', 'Boulder, Colorado'),
         ('cosprings', 'Colorado Springs, Colorado'),
@@ -93,12 +97,11 @@ class SearchForm(Form):
         ('rockies', 'highrockies, Colorado'),
         ('pueblo', 'pueblo, Colorado'),
         ('westslope', 'westernslope, Colorado'),
-        
-        
-        
-        ])
+
+
+        # Ohio
+        ('cleveland', 'Cleveland, Ohio'),
+
+    ])
     price = IntegerField(default=500)
     submit = SubmitField('Search')
-    
-    
-    
