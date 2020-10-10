@@ -25,6 +25,7 @@ class SearchForm(Form):
                         DataRequired()], default='Lawnmower')
     city = SelectField('City', choices=[
         # Alabama
+        
         ('auburn', 'Auburn, Alabama'),
         ('bham', 'Birmingham, Alabama'),
         ('dothan', 'Dothan, Alabama'),
@@ -108,7 +109,7 @@ class SearchForm(Form):
         ('delaware', 'Delaware'),
 
         # District of Columbia
-        ('washingtondc', 'Washington DC')
+        ('washingtondc', 'Washington DC'),
 
         # Florida
         ('miami', 'Broward County, Florida'),
