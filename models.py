@@ -24,8 +24,8 @@ class SearchForm(Form):
     query = StringField('Search', validators=[
                         DataRequired()], default='Lawnmower')
     city = SelectField('City', choices=[
-        # Alabama
 
+        # Alabama
         ('auburn', 'Auburn, Alabama'),
         ('bham', 'Birmingham, Alabama'),
         ('dothan', 'Dothan, Alabama'),
@@ -553,3 +553,4 @@ class SearchForm(Form):
     ])
     price = IntegerField(default=500)
     submit = SubmitField('Search')
+

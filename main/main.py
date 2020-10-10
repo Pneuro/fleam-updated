@@ -75,7 +75,7 @@ def result():
     city = city.city
     price = price.price
 
-    if 'result.csv' == None:
+    if 'result.csv':
         with open('result.csv', 'r') as scraped:
             response = pd.read_csv(scraped, delimiter=",")
 
@@ -83,7 +83,7 @@ def result():
             #print(f'This is the df variable: {df}')
         return render_template('result.html', tables=[df.to_html(classes='dataframe', index=False, render_links=True, sparsify=True)], titles=df.columns.values, query=query, city=city)
     else:
-        return redirect(url_for('main.noresults'))
+        return redirect(url_for('main.index'))
 
 
 @main.route('/about')
