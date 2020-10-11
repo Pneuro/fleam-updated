@@ -13,15 +13,16 @@ def create_app():
 
     app.register_blueprint(main)
     app.register_blueprint(admin)
-   
+
     with app.app_context():
         db.init_app(app)
         db.create_all()
         migrate = Migrate()
         migrate.init_app(app)
         ma.init_app(app)
-        
+
     return app
+
 
 app = create_app()
 
@@ -46,14 +47,11 @@ app.config.update(
 
 app.app_context().push()
 
-for i in dir(session):
-    print(i)
-
-
 @app.route('/')
 def fleam():
     ''' This route shall redirect to the main folder index.html file '''
     return redirect('admin/login')
+
 
 if __name__ == '__main__':
     app.run()
