@@ -48,7 +48,7 @@ app.config.update(
 app.app_context().push()
 
 @app.route('/')
-def fleam():
+def index():
     ''' This route shall redirect to the main folder index.html file '''
     return redirect('admin/login')
 
