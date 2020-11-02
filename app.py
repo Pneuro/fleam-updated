@@ -1,9 +1,10 @@
-from flask import Flask, redirect, current_app, g, session, request
+from flask import Flask, redirect, current_app, g, session, request, render_template
 from admin.admin import admin
 from main.main import main
 from db import db, ma
 from flask_migrate import Migrate
 import os
+
 
 
 def create_app():
@@ -13,7 +14,7 @@ def create_app():
 
     app.register_blueprint(main)
     app.register_blueprint(admin)
-
+    
     with app.app_context():
         db.init_app(app)
         db.create_all()
@@ -47,10 +48,11 @@ app.config.update(
 
 app.app_context().push()
 
+
 @app.route('/')
 def index():
     ''' This route shall redirect to the main folder index.html file '''
-    return redirect('admin/login')
+    return redirect('main/index')
 
 
 if __name__ == '__main__':

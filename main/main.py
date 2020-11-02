@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, g, current_app, session, url_for
+from flask import Blueprint, render_template, request, redirect, g, current_app, session, url_for, abort
 from models import SearchForm
 from db import SearchQuery, User, Results, search_schema, searchs_schema, db
 import pandas as pd
@@ -30,7 +30,6 @@ class ScrapeControl():
 @main.route('/')
 @main.route('/home', methods=['POST', 'GET'])
 def index():
-
     ScrapeControl.kill_scraper()
     form = SearchForm()
     if request.method == 'POST':
@@ -40,7 +39,6 @@ def index():
         db_query = SearchQuery(query, city, price)
         db.session.add(db_query)
         db.session.commit()
-
         ScrapeControl.get_data()
         sleep(2)
         # Redirect here to scrape the data.
@@ -60,7 +58,6 @@ def result():
         SearchQuery.id.desc()).first(),
     db_price = db.session.query(SearchQuery.price).order_by(
         SearchQuery.id.desc()).first(),
-
     city_name = db.session.query(SearchQuery.city).order_by(
         SearchQuery.id.desc()).first()
 
@@ -81,12 +78,21 @@ def result():
 
             df = pd.DataFrame(data=response)
             #print(f'This is the df variable: {df}')
-        return render_template('result.html', tables=[df.to_html(classes='dataframe', index=False, render_links=True, sparsify=True)], titles=df.columns.values, query=query, city=city)
+        return render_template('result.html', tables=[df.to_html(classes='dataframe',
+                                                                 index=False,
+                                                                 render_links=True,
+                                                                 sparsify=True)],
+                               titles=df.columns.values,
+                               query=query,
+                               city=city
+                               )
     else:
+        abort(500)
         return redirect(url_for('main.index'))
 
 
 @main.route('/about')
 def about():
     return render_template('about.html')
+
 
